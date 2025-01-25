@@ -1,0 +1,28 @@
+Answer questions marked as "QS"
+
+QS1.1:
+Depth-First Search (DFS) uses a stack because it follows a Last-In-First-Out (LIFO) order, allowing the algorithm to explore the most recent (deepest) node first. This enables DFS to dive deep into one branch before backtracking, making the stack a natural choice for managing the nodes to be explored.
+
+QS1.2:
+In Depth-First Search (DFS), the exploration order may seem scattered, as the algorithm dives deep into one branch before backtracking, creating a mix of early (bright red) and late explorations. Pacman does not visit all explored squares on the way to the goal; many are dead ends explored during the search but ignored in the final solution path. This is typical of DFS.
+
+QS2.1:
+
+
+QS3.1:
+
+
+
+QS4.1:
+
+
+QS5.1:
+
+
+QS5.2:
+
+
+QS6.1:
+
+
+QS7.1:
