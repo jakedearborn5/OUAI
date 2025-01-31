@@ -158,6 +158,34 @@ def breadthFirstSearch(problem: SearchProblem) -> List[Directions]:
 def uniformCostSearch(problem: SearchProblem) -> List[Directions]:
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
+
+    from util import PriorityQueue #Import Prioirty Queue data structure
+
+    #Initialize queue and set to track visited nodes
+    fringe = PriorityQueue()
+    visited = set()
+
+    #Enqueue start state
+    fringe.push((problem.getStartState(), []), 0)
+
+    while not fringe.isEmpty():
+        state, path = fringe.pop() #Get current state and path
+
+        if state in visited:
+            continue #Skip visited states
+    
+        visited.add(state) #Mark state as visited
+    
+        if problem.isGoalState(state):
+            return path #Return path when goal is found
+    
+        for successor, action, _ in problem.getSuccessors(state):
+            if successor not in visited:
+                #Enqueue successor and updated path
+                fringe.push((successor, path + [action]), problem.getCostOfActions(path + [action]))
+
+    return [] #Return empty if no solution
+    
     util.raiseNotDefined()
 
 def nullHeuristic(state, problem=None) -> float:
@@ -169,7 +197,49 @@ def nullHeuristic(state, problem=None) -> float:
 
 def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> List[Directions]:
     """Search the node that has the lowest combined cost and heuristic first."""
-    "*** YOUR CODE HERE ***"
+    from util import PriorityQueue
+
+    fringe = PriorityQueue()  # Priority queue for A*
+    visited = {}  # Tracks the lowest known cost for each state (using default set stucture bc of typing errors)
+
+    start_state = problem.getStartState()
+    initial_heuristic = heuristic(start_state, problem)
+
+    # Push the start state onto the fringe with f(n) = g(n) + h(n)
+    fringe.push((start_state, [], 0), 0 + initial_heuristic)  # (state, path, g(n)), priority = f(n)
+
+    while not fringe.isEmpty():
+        state, path, g = fringe.pop()
+
+        # Skip if we've already found a cheaper path to this state
+        if state in visited and visited[state] <= g:
+            continue
+
+        # Mark the state as visited with its current cost
+        visited[state] = g
+
+        # Check if this is the goal state
+        if problem.isGoalState(state):
+            return path
+
+        for successor, action, stepCost in problem.getSuccessors(state):
+            next_cost = g + stepCost
+
+            # Skip if cheaper path found to this successor
+            if successor in visited and visited[successor] <= next_cost:
+                continue
+
+            # Calculate the heuristic for the successor
+            successor_heuristic = heuristic(successor, problem)
+
+            f = next_cost + successor_heuristic
+
+           # Push new successor onto the fringe with f(n) = g(n)(next_cost) + h(n)(successor_heuristic)
+            fringe.push((successor, path + [action], next_cost), f)
+
+
+    return []  # No solution found
+    
     util.raiseNotDefined()
 
 # Abbreviations

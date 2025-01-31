@@ -4,25 +4,32 @@ QS1.1:
 Depth-First Search (DFS) uses a stack because it follows a Last-In-First-Out (LIFO) order, allowing the algorithm to explore the most recent (deepest) node first. This enables DFS to dive deep into one branch before backtracking, making the stack a natural choice for managing the nodes to be explored.
 
 QS1.2:
-In Depth-First Search (DFS), the exploration order may seem scattered, as the algorithm dives deep into one branch before backtracking, creating a mix of early (bright red) and late explorations. Pacman does not visit all explored squares on the way to the goal; many are dead ends explored during the search but ignored in the final solution path. This is typical of DFS.
+In DFS, the exploration order may seem scattered, as the algorithm dives deep into one branch before backtracking, creating a mix of early (bright red) and late explorations. Pacman does not visit all explored squares on the way to the goal; many are dead ends explored during the search but ignored in the final solution path. This is typical of DFS.
 
 QS2.1:
 BFS uses a queue because it follows a First-In-First-Out (FIFO) order, exploring all nodes at the current depth before moving deeper. This ensures systematic exploration and guarantees the shortest path (fewest actions) when all actions have the same cost.
 
 QS3.1:
-
-
+By utilizing the getCostOfActions((list of actions + next action)) function, the Priority Queue is informed about the cost of each action and systematically checks all same-cost states before incrementing the priority and exploring the next queue set.
 
 QS4.1:
+The Manhattan is better at directing the Agent to a corner because it is providing non-trivial and admissable data to the agent, which is shown by fewer expanded nodes. However the null heuristic is also optimal, but A* without a non-trivial heuristic devolves into a UCS.
 
+QS4.2:
+In openMaze, more of what I just explained is observable.
 
 QS5.1:
-
+In the CornersProblem, the state is represented as a tuple consisting of two components: Pac-Man's current position, stored as a tuple (x, y), and a tuple of visited corners, which tracks the corners Pac-Man has already visited. This representation is efficient and compact, allowing easy tracking of Pac-Man's progress while ensuring that the necessary information for the search algorithm is stored immutably. The state evolves as Pac-Man moves and visits new corners, providing a clear path to solving the problem.
 
 QS5.2:
-
+The CornersProblem involves finding a path that visits all four corners of the maze. The state is a tuple of Pac-Man's position and the visited corners. The getSuccessors method explores valid moves, updating visited corners, and isGoalState checks if all corners have been visited. The problem is solved using a search algorithm to find the optimal path.
 
 QS6.1:
-
+I used a Manhattan distance heuristic, estimating the cost to the nearest unvisited corner. While it’s fast and encourages immediate progress, it can lead to suboptimal paths, as it doesn’t consider the best order for visiting all corners. However, it is consistent, as it satisfies the condition that the estimated cost never exceeds the cost to reach a successor plus its heuristic value.
 
 QS7.1:
+QS7.1:
+The Manhattan Distances has become very useful for giving a good cost estimate to Pacman on his grid, it works very well when simply trying to get as many dots as possible because in this case Manhattan Distance is very reliable. Conversely, it is near useless if the distances are equal, resulting is UCS performance. The Manhattan Distance is consistent because it is based on the legs of a triangle and the hypotenuse which can never be inconsistent on this grid environment.
+
+QS8.1:
+The solution uses BFS to find the shortest path to the closest food dot, repeating until all food is collected. While efficient for small grids, it can be inefficient with many food dots and doesn't optimize globally. It doesn't consider dynamic obstacles like ghosts and could be improved for larger maps.
