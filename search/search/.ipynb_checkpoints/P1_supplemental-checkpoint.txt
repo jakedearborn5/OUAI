@@ -25,6 +25,11 @@ QS5.2:
 The CornersProblem involves finding a path that visits all four corners of the maze. The state is a tuple of Pac-Man's position and the visited corners. The getSuccessors method explores valid moves, updating visited corners, and isGoalState checks if all corners have been visited. The problem is solved using a search algorithm to find the optimal path.
 
 QS6.1:
-
+I used a Manhattan distance heuristic, estimating the cost to the nearest unvisited corner. While it’s fast and encourages immediate progress, it can lead to suboptimal paths, as it doesn’t consider the best order for visiting all corners. However, it is consistent, as it satisfies the condition that the estimated cost never exceeds the cost to reach a successor plus its heuristic value.
 
 QS7.1:
+QS7.1:
+The Manhattan Distances has become very useful for giving a good cost estimate to Pacman on his grid, it works very well when simply trying to get as many dots as possible because in this case Manhattan Distance is very reliable. Conversely, it is near useless if the distances are equal, resulting is UCS performance. The Manhattan Distance is consistent because it is based on the legs of a triangle and the hypotenuse which can never be inconsistent on this grid environment.
+
+QS8.1:
+The solution uses BFS to find the shortest path to the closest food dot, repeating until all food is collected. While efficient for small grids, it can be inefficient with many food dots and doesn't optimize globally. It doesn't consider dynamic obstacles like ghosts and could be improved for larger maps.
