@@ -1,0 +1,27 @@
+Please Enter your team's full names and your answers to the questions marked by QS questions here!
+
+Q1.1:
+It is taking the games successive states that provide a value based on simple observations of the field, like if their is a ghost right next to him. By introducing an extra parameter, like the inverse of the manhattan distance to the food, we can make it more respectable in performance. 
+
+Q1.2:
+The resiprocal mantahhan distance makes the agent consider the distance to a pellet to dictate his path, the closer to the pellet, the higher the reward and thus the agent is more likely to take that path.
+
+Q2.1:
+The implementation works because the outcome of each depth is determined by the active agent, a ghost is a minimizer, and Pacman is a maximizer. The function makes recursive calls within itself to so each depth can make its comparison. This "passing of the torch" cascades the the plan into an informed action.
+
+Q3.1:
+This is true becuase if conducted correctly, the αβ Agent does not affect the outcome of the algorithm, it simply shortens the amount of proccessing to be done.
+
+Q3.2
+The first best action is always taken first due to the nature of sequential instructions in code:
+if val > maxVal:
+        maxVal = val
+        maxAction = action  # First best action found is stored
+    if maxVal >= beta:
+        return maxVal # Pruning 
+
+Q4.1:
+Expectimax models ghosts as random movers, with Pac-Man choosing actions based on the highest expected score. Unlike Minimax, it averages ghost moves instead of assuming worst-case scenarios, making Pac-Man more aggressive and opportunistic for higher-scoring gameplay.
+
+Q5.1:
+The new evaluation function improves Pac-Man’s strategy by balancing food collection, ghost avoidance, and power capsule usage. It rewards chasing scared ghosts, penalizes risky moves near active ones, and encourages faster game completion. This makes Pac-Man more adaptive and efficient compared to the previous function.
